@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <title>Log In</title>
+</head>
+<body>
+
+<form th:action="@{/login}" th:object="${user}" method="post">
+    <input type="text" th:field="*{username}" placeholder="Choose a username."/>
+    <div class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+    <br/>
+    <input type="text" th:field="*{password}" placeholder="Choose a password."/>
+    <div class="error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    <input class="button" type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>

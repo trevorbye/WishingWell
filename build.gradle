@@ -1,0 +1,41 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+jar {
+	baseName = 'wishingwell'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	//allows spring to manage ORM
+	compile 'org.springframework:spring-orm:4.2.5.RELEASE'
+	//allows objects to remain connected to db for quicker processing
+	compile 'org.apache.tomcat:tomcat-dbcp:8.0.32'
+	compile group: 'org.hibernate', name: 'hibernate-core', version: '5.0.9.Final'
+	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.0.9.Final'
+	compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.10.3.RELEASE'
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}

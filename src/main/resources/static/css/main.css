@@ -1,0 +1,11 @@
+@import 'https://fonts.googleapis.com/css?family=Rajdhani';
+
+body {
+    background-color: black;
+    font-family: Rajdhani, sans-serif;
+    color: white;
+}
+
+nav {
+    background-color: #3d72a4 ;
+}

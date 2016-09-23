@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WishingWell.iml" filepath="$PROJECT_DIR$/.idea/modules/WishingWell.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WishingWell_main.iml" filepath="$PROJECT_DIR$/.idea/modules/WishingWell_main.iml" group="WishingWell" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WishingWell_test.iml" filepath="$PROJECT_DIR$/.idea/modules/WishingWell_test.iml" group="WishingWell" />
+    </modules>
+  </component>
+</project>
