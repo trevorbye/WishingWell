@@ -24,4 +24,8 @@ public interface WishesDao extends CrudRepository<WishesEntity, Long>{
 
     //delete wish
     void delete(WishesEntity deleted);
+
+    //find wish by name
+    WishesEntity findByWish(String wish);
+
 }

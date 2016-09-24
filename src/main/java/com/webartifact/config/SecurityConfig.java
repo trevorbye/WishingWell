@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .antMatchers("/", "/sign-up", "/account-create").permitAll()
                     .anyRequest().hasRole("USER")
                     .and()
+                    .csrf().disable()
                 .formLogin()
                     .loginPage("/login")
                     .permitAll()

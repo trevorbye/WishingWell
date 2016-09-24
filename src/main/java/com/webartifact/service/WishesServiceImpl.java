@@ -31,6 +31,18 @@ public class WishesServiceImpl implements WishesService {
         return wish;
     }
 
+    //todo use vote method on "well" page
+    @Override
+    public WishesEntity addVote(String wish) {
+        //get wish object
+        WishesEntity wishesEntity = wishesDao.findByWish(wish);
+        //add a vote
+        wishesEntity.setVotecount(wishesEntity.getVotecount() + 1);
+        //save back in db
+        wishesDao.save(wishesEntity);
+        return wishesEntity;
+    }
+
     @Override
     public void deleteWish(WishesEntity deleted) {
         wishesDao.delete(deleted);

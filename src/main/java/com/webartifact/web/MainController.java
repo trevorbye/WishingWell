@@ -38,6 +38,7 @@ public class MainController {
 
     @GetMapping("/")
     public String homePage(Model model, Principal principal) {
+
         //todo display link to user page if logged in, else display login/sign-up
         if (principal != null) {
             model.addAttribute("currentUser", principal.getName());
@@ -75,7 +76,6 @@ public class MainController {
         List<UserProfileEntity> userList = userProfileService.findAll();
         for (UserProfileEntity record : userList) {
             if (user.getUsername().equals(record.getUsername())) {
-                //todo add this flash to template
                 redirectAttributes.addFlashAttribute("userNameTaken", "This username is already taken.");
                 return "redirect:/sign-up";
             }
@@ -96,6 +96,7 @@ public class MainController {
     public String userHome(@PathVariable String username, Model model, Principal principal) {
         //get current username
         model.addAttribute("currentUser", principal.getName());
+
         return "user-home";
     }
 

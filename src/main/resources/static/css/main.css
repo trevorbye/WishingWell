@@ -4,8 +4,10 @@ body {
     background-color: black;
     font-family: Rajdhani, sans-serif;
     color: white;
+    font-size: 14px;
 }
 
 nav {
-    background-color: #3d72a4 ;
+    background-color: #3d72a4;
 }
+

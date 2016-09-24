@@ -11,5 +11,6 @@ public interface WishesService {
     List<WishesEntity> wishListByUser(String username);
     List<WishesEntity> findAllWishes();
     WishesEntity saveWish(WishesEntity persisted);
+    WishesEntity addVote(String wish);
     void deleteWish(WishesEntity deleted);
 }

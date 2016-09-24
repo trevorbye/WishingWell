@@ -6,15 +6,80 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link rel="stylesheet" href="/css/main.css"/>
+
+    <script   src="https://code.jquery.com/jquery-3.1.1.js"   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   crossorigin="anonymous"></script>
+
     <title>Wishing Well</title>
         <nav>
-            <a th:href="@{|/user/${currentUser}|}">Profile</a>
+            <a th:href="@{|/user/${currentUser}|}" th:if="${currentUser} != null">Profile</a>
 
-            <a href="/sign-up">Sign Up</a>
-            <a href="/login">Log In</a>
+            <a class="right-align" href="/sign-up" th:if="${currentUser} == null">Sign Up</a>
+            <a class="right-align" href="/login" th:if="${currentUser} == null">Log In</a>
         </nav>
 </head>
 <body>
 
+    <div id="feedback"></div>
+    <form id="wish-form" th:if="${currentUser} != null">
+        <input type="text" id="wish"/>
+        <button type="submit" id="btn-submit">Put this wish in the well.</button>
+    </form>
+
+    <script>
+        jQuery(document).ready(function($) {
+
+            $("#wish-form").submit(function(event) {
+
+                // Disble the search button
+                enableSearchButton(false);
+
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+
+                searchViaAjax();
+
+            });
+
+        });
+
+        function searchViaAjax() {
+
+            var search = {}
+            search["wish"] = $("#wish").val();
+
+            $.ajax({
+                type : "POST",
+                contentType : "application/json",
+                url : "/addvote",
+                data : JSON.stringify(search),
+                dataType : 'json',
+                timeout : 100000,
+                success : function(data) {
+                    console.log("SUCCESS: ", data);
+                    display(data);
+                },
+                error : function(e) {
+                    console.log("ERROR: ", e);
+                    display(e);
+                },
+                done : function(e) {
+                    console.log("DONE");
+                    enableSearchButton(true);
+                }
+            });
+
+        }
+
+        function enableSearchButton(flag) {
+            $("#btn-submit").prop("disabled", flag);
+        }
+
+        function display(data) {
+            var json = "<h4>Ajax Response</h4><pre>"
+                    + JSON.stringify(data, null, 4) + "</pre>";
+            $('#feedback').html(json);
+        }
+
+    </script>
 </body>
 </html>

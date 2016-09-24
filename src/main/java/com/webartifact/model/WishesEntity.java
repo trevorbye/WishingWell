@@ -55,5 +55,12 @@ public class WishesEntity {
         this.originaluser = originaluser;
     }
 
+    public WishesEntity(String wish, long votecount, String originaluser) {
+        this.wish = wish;
+        this.votecount = votecount;
+        this.originaluser = originaluser;
+    }
 
+    public WishesEntity() {
+    }
 }
