@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -36,39 +33,17 @@ public class MainController {
     @Autowired
     RoleService roleService;
 
-    @GetMapping("/")
-    public String homePage(Model model, Principal principal) {
-
-        //todo display link to user page if logged in, else display login/sign-up
-        if (principal != null) {
-            model.addAttribute("currentUser", principal.getName());
-        }
-
-        return "index";
-    }
 
 
-    @GetMapping("/sign-up")
-    public String signUp(@ModelAttribute("user") UserProfileEntity user, @ModelAttribute("userNameTaken") String conflict, Model model) {
-
-        if (!model.containsAttribute("user")) {
-            model.addAttribute("user", new UserProfileEntity());
-        }
 
 
-        if (model.asMap().containsKey("BindingResult")) {
-            model.addAttribute("org.springframework.validation.BindingResult.user", model.asMap().get("BindingResult"));
-        }
 
-        return "sign-up";
-    }
 
     @PostMapping("account-create")
-    public String signUpSubmit(@Valid @ModelAttribute("user") final UserProfileEntity user, BindingResult result, RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
+    public String signUpSubmit(@ModelAttribute("user") final UserProfileEntity user, BindingResult result) throws Exception {
 
         if (result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("user", user);
-            redirectAttributes.addFlashAttribute("BindingResult", result);
+
 
             return "redirect:/sign-up";
         }
@@ -76,7 +51,7 @@ public class MainController {
         List<UserProfileEntity> userList = userProfileService.findAll();
         for (UserProfileEntity record : userList) {
             if (user.getUsername().equals(record.getUsername())) {
-                redirectAttributes.addFlashAttribute("userNameTaken", "This username is already taken.");
+
                 return "redirect:/sign-up";
             }
         }
@@ -86,8 +61,7 @@ public class MainController {
         user.setRole(roleEntity);
         userProfileService.save(user);
 
-        //auto-login after registration
-        request.login(user.getUsername(), user.getPassword());
+
 
         return "redirect:/user/" + user.getUsername();
     }

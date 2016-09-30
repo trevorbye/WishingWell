@@ -1,19 +1,10 @@
 /**
  * Created by trevorBye on 9/23/16.
  */
-jQuery(document).ready(function($) {
+$(document).on('click', '#btn-submit', function() {
 
-    $("#wish-form").submit(function(event) {
-
-        // Disble the search button
-        enableSearchButton(false);
-
-        // Prevent the form from submitting via the browser.
-        event.preventDefault();
-
+        $('#feedback').hide();
         searchViaAjax();
-
-    });
 
 });
 
@@ -25,7 +16,7 @@ function searchViaAjax() {
     $.ajax({
         type : "POST",
         contentType : "application/json",
-        url : "${home}addvote",
+        url : "/addwish",
         data : JSON.stringify(search),
         dataType : 'json',
         timeout : 100000,
@@ -45,13 +36,34 @@ function searchViaAjax() {
 
 }
 
-function enableSearchButton(flag) {
-    $("#btn-submit").prop("disabled", flag);
-}
 
 function display(data) {
-    var json = "<h4>Ajax Response</h4><pre>"
-        + JSON.stringify(data, null, 4) + "</pre>";
-    $('#feedback').html(json);
+    var jsonString = JSON.stringify(data);
+    var json = JSON.parse(jsonString);
+    $('#feedback').html(json.msg);
+    $('#feedback').show();
 }
+
+$('#feedback').hover(function(){
+    $('#feedback').fadeOut(300, function(){
+        $(this).hide();
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

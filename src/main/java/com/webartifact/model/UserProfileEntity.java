@@ -1,12 +1,10 @@
 package com.webartifact.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,13 +24,11 @@ public class UserProfileEntity implements UserDetails{
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
-    @NotEmpty(message = "Enter a password1.")
-    @Size(min = 6, max = 15, message = "Password must be between 6 and 15 characters.")
+
     @Column(name = "password", length = 100)
     private String password;
 
-    @NotEmpty(message = "Enter a username1.")
-    @Size(min = 6, max = 20, message = "Username must be between 6 and 20 characters.")
+
     @Column(name = "username", length = 20, unique = true)
     private String username;
 
