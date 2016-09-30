@@ -10,7 +10,7 @@ $(document).on('click', '#btn-submit', function() {
 
 function searchViaAjax() {
 
-    var search = {}
+    var search = {};
     search["wish"] = $("#wish").val();
 
     $.ajax({

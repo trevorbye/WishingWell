@@ -17,22 +17,22 @@
 </head>
 
 <body>
-        <nav class="nav">
+        <nav class="nav" ng-controller="home as controller">
             <ul class="navback">
                 <li>
                     <a class="active" href="#/">The Well</a>
                 </li>
-                <li>
+                <li ng-hide="!authenticated">
                     <a href="#/profile" >Profile</a>
                 </li>
-                <li>
+                <li ng-hide="authenticated">
                     <a href="#/sign-up">Sign Up</a>
                 </li>
-                <li>
+                <li ng-hide="authenticated">
                     <a href="#/login">Log In</a>
                 </li>
-                <li>
-                    <a href="#/logout">Sign Out</a>
+                <li ng-hide="!authenticated">
+                    <a href="" ng-click="controller.logout()">Sign Out</a>
                 </li>
             </ul>
         </nav>

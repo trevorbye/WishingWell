@@ -20,34 +20,56 @@ wishingWell.config(function($routeProvider, $httpProvider) {
 
 });
 
-wishingWell.controller('home', function($scope, $http) {});
+var config = {
+    headers : {
+        'Content-type': 'application/json'
+    }
+};
+
+
+wishingWell.controller('home', function($rootScope, $http, $location) {
+    var self = this;
+    self.logout = function() {
+        $http.post('logout',{}).finally(function() {
+            $rootScope.authenticated = false;
+            $location.path("/");
+        });
+    }
+});
 
 
 
 
 wishingWell.controller('register', function($http, $location, $rootScope) {
 
+    var jsonResponse;
+    var jsonString;
     var noerrors = false;
     var self = this;
     self.user = {};
     self.msg = undefined;
 
 
-    if (self.user.username != null && self.user.username.length <= 20 && self.user.password != null) {
-        noerrors = true;
-    }
-
     self.register = function() {
 
-        if (noerrors) {
-            $http.post('register', user).success(function (response) {
+        if (!(self.user.username == undefined) && self.user.username.length <= 20 && !(self.user.password == undefined)) {
+            noerrors = true;
+        }
 
-                if (response.data.code == "200") {
+        if (noerrors) {
+            $http.post('registeruser', JSON.stringify(self.user), config).then(function(response) {
+
+                jsonString = JSON.stringify(response.data);
+                jsonResponse = JSON.parse(jsonString);
+
+                if (jsonResponse.code == "200") {
                     $rootScope.authenticated = true;
                     $location.path("/user-home");
                 } else {
-                    msg = response.data.msg;
                     $location.path("/sign-up");
+                    self.msg = jsonResponse.msg;
+                    noerrors = false;
+                    self.user = {};
                 }
 
             });

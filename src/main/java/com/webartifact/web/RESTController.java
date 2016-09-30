@@ -120,7 +120,7 @@ public class RESTController {
         return list;
     }
 
-    @RequestMapping("/register")
+    @RequestMapping("/registeruser")
     public AjaxResponseBody registerUser(@RequestBody UserProfileEntity userProfileEntity, HttpServletRequest request) throws ServletException {
 
         AjaxResponseBody responseBody = new AjaxResponseBody();
