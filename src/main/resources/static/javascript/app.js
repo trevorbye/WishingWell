@@ -14,6 +14,10 @@ wishingWell.config(function($routeProvider, $httpProvider) {
         templateUrl : 'sign-up.html',
         controller : 'register',
         controllerAs: 'controller'
+    }).when('/profile/:user', {
+        templateUrl: 'user-home.html',
+        controller: 'profile',
+        controllerAs: 'controller'
     }).otherwise('/');
 
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
@@ -27,8 +31,20 @@ var config = {
 };
 
 
-wishingWell.controller('home', function($rootScope, $http, $location) {
+wishingWell.controller('menu', function($rootScope, $http, $location, $scope) {
+    var jsonResponse;
+    var jsonString;
     var self = this;
+
+    $http.get('user2').then(function(response) {
+        jsonString = JSON.stringify(response.data);
+        jsonResponse = JSON.parse(jsonString);
+
+        $scope.name = jsonResponse.msg;
+    }, function() {
+        console.log("error");
+    });
+
     self.logout = function() {
         $http.post('logout',{}).finally(function() {
             $rootScope.authenticated = false;
@@ -38,6 +54,9 @@ wishingWell.controller('home', function($rootScope, $http, $location) {
 });
 
 
+wishingWell.controller('home', function() {
+
+});
 
 
 wishingWell.controller('register', function($http, $location, $rootScope) {
@@ -84,7 +103,8 @@ wishingWell.controller('register', function($http, $location, $rootScope) {
 wishingWell.controller('navigation',
 
     function($rootScope, $http, $location) {
-
+        var jsonString;
+        var jsonResponse;
         var self = this;
 
         var authenticate = function(credentials, callback) {
@@ -94,6 +114,10 @@ wishingWell.controller('navigation',
             } : {};
 
             $http.get('user', {headers : headers}).then(function(response) {
+
+                jsonString = JSON.stringify(response.data);
+                jsonResponse = JSON.parse(jsonString);
+
                 if (response.data.name) {
                     $rootScope.authenticated = true;
                 } else {

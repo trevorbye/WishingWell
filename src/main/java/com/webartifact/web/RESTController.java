@@ -45,6 +45,14 @@ public class RESTController {
         return user;
     }
 
+    @RequestMapping("/user2")
+    public AjaxResponseBody user2(Principal user) {
+        AjaxResponseBody responseBody = new AjaxResponseBody();
+        responseBody.setMsg(user.getName());
+        responseBody.setCode("200");
+        return responseBody;
+    }
+
     @JsonView(Views.Public.class)
     @RequestMapping("/addwish")
     public AjaxResponseBody addWishViaAjax(@RequestBody AjaxWishModel wish, Principal principal) {
