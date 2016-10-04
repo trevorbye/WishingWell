@@ -14,8 +14,8 @@ public class WishesServiceImpl implements WishesService {
     private WishesDao wishesDao;
 
     @Override
-    public List<WishesEntity> wishListByUser(String username) {
-        List<WishesEntity> list = wishesDao.findByOriginaluser(username);
+    public List<WishesEntity> wishListByUserDesc(String username) {
+        List<WishesEntity> list = wishesDao.findByOriginaluserOrderByVotecountDesc(username);
         return list;
     }
 

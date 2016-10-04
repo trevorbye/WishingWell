@@ -9,6 +9,7 @@
 
 
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
     <script   src="https://code.jquery.com/jquery-3.1.1.js"   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   crossorigin="anonymous"></script>
@@ -18,13 +19,13 @@
 </head>
 
 <body>
-        <nav class="nav" ng-controller="menu as controller">
+        <nav class="nav" ng-controller="menu as vm">
             <ul class="navback">
                 <li>
                     <a class="active" href="#/">The Well</a>
                 </li>
                 <li ng-hide="!authenticated">
-                    <a href="#/profile/{{controller.data.name}}">Profile</a>
+                    <a href="" ng-click="vm.userpage()">Profile</a>
                 </li>
                 <li ng-hide="authenticated">
                     <a href="#/sign-up">Sign Up</a>
@@ -33,16 +34,18 @@
                     <a href="#/login">Log In</a>
                 </li>
                 <li ng-hide="!authenticated">
-                    <a href="" ng-click="controller.logout()">Sign Out</a>
+                    <a href="" ng-click="vm.logout()">Sign Out</a>
                 </li>
             </ul>
-            <div ng-model="name">{{name}}</div>
+
         </nav>
 
 
 
 
         <div ng-view></div>
+
+
 
         <script src="/javascript/wishAJAX.js"></script>
 </body>

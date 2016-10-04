@@ -5,8 +5,10 @@ $(document).on('click', '#btn-submit', function() {
 
         $('#feedback').hide();
         searchViaAjax();
-
 });
+
+
+
 
 function searchViaAjax() {
 
@@ -36,19 +38,16 @@ function searchViaAjax() {
 
 }
 
-
 function display(data) {
     var jsonString = JSON.stringify(data);
     var json = JSON.parse(jsonString);
     $('#feedback').html(json.msg);
-    $('#feedback').show();
+    $('#feedback').fadeOut("slow", function() {
+        this.hide();
+    })
 }
 
-$('#feedback').hover(function(){
-    $('#feedback').fadeOut(300, function(){
-        $(this).hide();
-    });
-});
+
 
 
 

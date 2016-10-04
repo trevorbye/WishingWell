@@ -1,15 +1,26 @@
-<div class="contain-form" ng-hide="!authenticated">
-    <div id="feedback"></div>
-    <br>
-    <form id="wish-form">
-        <ul>
-            <li>
-                <button class="wish-button" id="btn-submit">Make wish.</button>
-            </li>
+<div>
 
-            <li>
-                <input type="text" id="wish">
-            </li>
-        </ul>
-    </form>
+    <div id="vis.js">
+        <p>vis.js goes here, will be visible to user whether or not they are logged in.</p>
+    </div>
+
+
+    <div ng-hide="!authenticated">
+        <div id="feedback"></div>
+        <br>
+        <form id="wish-form">
+            <ul>
+                <li>
+                    <button class="wish-button" id="btn-submit">Make wish.</button>
+                </li>
+
+                <li>
+                    <input type="text" id="wish">
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <div ng-model="controller.username" ng-hide="!authenticated">{{controller.username}}</div>
+
 </div>

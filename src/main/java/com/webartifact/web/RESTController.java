@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by trevorBye on 9/23/16.
@@ -95,6 +95,7 @@ public class RESTController {
         }
     }
 
+    //todo test this method
     //method to add vote; restricted if user has already voted for wish
     @RequestMapping("/addvote")
     public AjaxResponseBody addVoteViaAjax(@RequestBody AjaxWishModel wish, Principal principal) {
@@ -157,5 +158,22 @@ public class RESTController {
         responseBody.setCode("200");
         responseBody.setMsg("Account created.");
         return responseBody;
+    }
+
+    @RequestMapping("/display-top-wishes")
+    public List<WishesEntity> topWishes(Principal principal) {
+
+        //query all wishes by user
+        List<WishesEntity> fullList = wishesService.wishListByUserDesc(principal.getName());
+        List<WishesEntity> topTenList = new ArrayList<>();
+
+        for (WishesEntity record : fullList) {
+            topTenList.add(record);
+            if (topTenList.size() == 10) {
+                break;
+            }
+        }
+
+        return topTenList;
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
  * Created by trevorBye on 9/21/16.
  */
 public interface WishesService {
-    List<WishesEntity> wishListByUser(String username);
+    List<WishesEntity> wishListByUserDesc(String username);
     List<WishesEntity> findAllWishes();
     WishesEntity saveWish(WishesEntity persisted);
     WishesEntity addVote(String wish);

@@ -5,7 +5,7 @@ wishingWell.config(function($routeProvider, $httpProvider) {
     $routeProvider.when('/', {
         templateUrl : 'home.html',
         controller : 'home',
-        controllerAs: 'controller'
+        controllerAs : 'controller'
     }).when('/login', {
         templateUrl : 'login.html',
         controller : 'navigation',
@@ -16,8 +16,7 @@ wishingWell.config(function($routeProvider, $httpProvider) {
         controllerAs: 'controller'
     }).when('/profile/:user', {
         templateUrl: 'user-home.html',
-        controller: 'profile',
-        controllerAs: 'controller'
+        controller: 'profile'
     }).otherwise('/');
 
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
@@ -31,21 +30,25 @@ var config = {
 };
 
 
-wishingWell.controller('menu', function($rootScope, $http, $location, $scope) {
+wishingWell.controller('menu', function($rootScope, $http, $location) {
     var jsonResponse;
     var jsonString;
-    var self = this;
+    var vm = this;
+    var currentuser = undefined;
 
-    $http.get('user2').then(function(response) {
-        jsonString = JSON.stringify(response.data);
-        jsonResponse = JSON.parse(jsonString);
+    vm.userpage = function() {
+        $http.get('user2').then(function (response) {
+            jsonString = JSON.stringify(response.data);
+            jsonResponse = JSON.parse(jsonString);
 
-        $scope.name = jsonResponse.msg;
-    }, function() {
-        console.log("error");
-    });
+            currentuser = jsonResponse.msg;
+            $location.path("/profile/" + currentuser);
+        }, function () {
+            console.log("error");
+        });
+    }
 
-    self.logout = function() {
+    vm.logout = function() {
         $http.post('logout',{}).finally(function() {
             $rootScope.authenticated = false;
             $location.path("/");
@@ -54,8 +57,47 @@ wishingWell.controller('menu', function($rootScope, $http, $location, $scope) {
 });
 
 
-wishingWell.controller('home', function() {
 
+wishingWell.controller('profile', function($rootScope, $routeParams, $http, $scope) {
+
+    $scope.topten = [];
+    var username = $routeParams.user;
+
+    $http.get('display-top-wishes').then(function (response) {
+        $scope.topten = response.data;
+        console.log($scope.topten);
+    }, function () {
+        console.log("error");
+    });
+});
+
+wishingWell.controller('home', function($http) {
+
+    var jsonResponse;
+    var jsonString;
+    var self = this;
+    self.username = undefined;
+
+    //list to be fed to vis.js
+    var wishList = [];
+
+    //gets wish list from db
+    $http.get('getwishesJSON').then(function (response) {
+        wishList = response.data;
+    }, function () {
+        console.log("error");
+    });
+
+
+
+    $http.get('user2').then(function (response) {
+        jsonString = JSON.stringify(response.data);
+        jsonResponse = JSON.parse(jsonString);
+
+        self.username = jsonResponse.msg;
+    }, function () {
+        console.log("error");
+    });
 });
 
 

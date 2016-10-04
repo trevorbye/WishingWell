@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface WishesDao extends CrudRepository<WishesEntity, Long>{
     //returns list of wish objects for a unique user (use in trophy case)
-    List<WishesEntity> findByOriginaluser(String username);
+    List<WishesEntity> findByOriginaluserOrderByVotecountDesc(String username);
 
     //query all wishes
     List<WishesEntity> findAll();

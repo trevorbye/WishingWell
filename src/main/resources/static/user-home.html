@@ -1,19 +1,19 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <link rel="stylesheet" href="/css/main.css"/>
-    <title>User Home</title>
-</head>
-<body>
+<div>
 
-    <nav>
-        <a href="/">Well</a>
-        <p th:text="${currentUser}"></p>
-    </nav>
+    <table>
+        <thead>
+            <tr>
+                <th>Wish</th>
+                <th>Votes</th>
+            </tr>
+        </thead>
 
-</body>
-</html>
+        <tbody>
+            <tr ng-repeat="x in topten">
+                <td>{{x.wish}}</td>
+                <td>{{x.votecount}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
