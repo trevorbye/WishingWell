@@ -191,7 +191,7 @@ wishingWell.controller('navigation',
     });
 
 /** controller for vis network graph */
-wishingWell.controller('visGraph', ['$scope', '$window', 'appService', function($scope, $window, appService) {
+wishingWell.controller('VisCtrl', ['$scope', '$window', 'appService', function($scope, $window, appService) {
     var get = function() {
         appService.get().then(function(promise) {
             /** check to ensure angular is defined, can be removed */

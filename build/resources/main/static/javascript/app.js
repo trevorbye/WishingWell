@@ -191,16 +191,19 @@ wishingWell.controller('navigation',
     });
 
 /** controller for vis network graph */
-wishingWell.controller('visGraph', ['$scope', '$window', 'appService', function($scope, $window, appService) {
+wishingWell.controller('VisCtrl', ['$scope', '$window', 'appService', function($scope, $window, appService) {
     var get = function() {
         appService.get().then(function(promise) {
-        /** check to ensure angular is defined */
+            /** check to ensure angular is defined, can be removed */
             if(angular.isDefined) {
                 console.log('angular is defined');
             }
+            /** do not remove this */
             if (angular.isDefined(promise.error) && promise.error === 0) {
                 $scope.graph = {error: promise.error, data: {nodes: promise.nodes, edges: promise.edges}, options: promise.options};
             }
+            /** checks to see what promise error is. if we change 'data.json' to something else, this will return
+                undefined. can be removed */
             if(promise.error != 0) {
             console.log('error with promise, promise is : ' + promise.error)
             }
@@ -221,7 +224,7 @@ wishingWell.factory('appService', ['$q', '$http', function($q, $http) {
         get: function(method, url) {
           var deferred = $q.defer();
 
-          /** NOTE: we can replace 'data.json' with our actual data */
+          /** NOTE: we should be able replace 'data.json' with our actual data */
           $http.get('data.json')
             .success(function(response) {
               deferred.resolve(response);

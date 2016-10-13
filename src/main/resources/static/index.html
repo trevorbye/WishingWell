@@ -38,7 +38,7 @@
 
         </nav>
 
-         <div ng-controller="visGraph">
+         <div ng-controller="VisCtrl">
             <h2>Wishing Well</h2>
 
             <div ng-switch on="graph.error">
@@ -54,9 +54,9 @@
         </div>
 
         <! -- some of these scripts are external links that we could include if load speed becomes an issue -->
-        <link data-require="vis.js@3.10.0" data-semver="3.10.0" rel="stylesheet" href="https://rawgithub.com/almende/vis/v3.10.0/dist/vis.min.css" />
-        <script data-require="vis.js@3.10.0" data-semver="3.10.0" src="https://rawgithub.com/almende/vis/v3.10.0/dist/vis.min.js"></script>
-        <script data-require="angular.js@1.5.8" data-semver="1.5.8" src="https://code.angularjs.org/1.5.8/angular.js"></script>
+        <link data-require="vis.js@*" data-semver="3.10.0" rel="stylesheet" href="https://rawgithub.com/almende/vis/v3.10.0/dist/vis.min.css" />
+        <script data-require="vis.js@*" data-semver="3.10.0" src="https://rawgithub.com/almende/vis/v3.10.0/dist/vis.min.js"></script>
+        <script data-require="angularjs@1.5.8" data-semver="1.5.8" src="https://opensource.keycdn.com/angularjs/1.5.8/angular.min.js"></script>
         <script data-require="angular-route@*" data-semver="1.5.8" src="https://code.angularjs.org/1.5.8/angular-route.js"></script>
         <script src="/javascript/ngVisgraph.js"></script>
         <script src="/javascript/app.js"></script>
