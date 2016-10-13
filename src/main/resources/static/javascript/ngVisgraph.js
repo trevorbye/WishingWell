@@ -16,14 +16,15 @@ angular.module('ngVisgraph', [])
 
         /** build graph, pass in properties */
         graph = new vis.Network(container, scope.data, scope.options);
+
           return graph.on(scope.event, function(properties) {
             if (properties.nodes.length !== 0) {
-              scope.callback({params: properties});
+                scope.callback({params: properties});
             }
         });
       };
       /** async watch for data change events */
-      scope.$watch('data', function(newval, oldval) {
+      scope.$watch('data', function(newvalue, oldvalue) {
         buildGraph(scope);
       }, true);
     }

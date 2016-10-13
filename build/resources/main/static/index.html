@@ -38,10 +38,6 @@
 
         </nav>
 
-
-
-
-        <div ng-view>
          <div ng-controller="visGraph">
             <h2>Wishing Well</h2>
 
@@ -52,7 +48,11 @@
                 <div ng-switch-default></div>
             </div>
         </div>
+
+
+        <div ng-view>
         </div>
+
         <! -- some of these scripts are external links that we could include if load speed becomes an issue -->
         <link data-require="vis.js@3.10.0" data-semver="3.10.0" rel="stylesheet" href="https://rawgithub.com/almende/vis/v3.10.0/dist/vis.min.css" />
         <script data-require="vis.js@3.10.0" data-semver="3.10.0" src="https://rawgithub.com/almende/vis/v3.10.0/dist/vis.min.js"></script>

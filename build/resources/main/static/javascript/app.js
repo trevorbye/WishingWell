@@ -194,8 +194,15 @@ wishingWell.controller('navigation',
 wishingWell.controller('visGraph', ['$scope', '$window', 'appService', function($scope, $window, appService) {
     var get = function() {
         appService.get().then(function(promise) {
+        /** check to ensure angular is defined */
+            if(angular.isDefined) {
+                console.log('angular is defined');
+            }
             if (angular.isDefined(promise.error) && promise.error === 0) {
                 $scope.graph = {error: promise.error, data: {nodes: promise.nodes, edges: promise.edges}, options: promise.options};
+            }
+            if(promise.error != 0) {
+            console.log('error with promise, promise is : ' + promise.error)
             }
         }, function(promise) {
             console.error('appService.promise.error', promise);
@@ -209,24 +216,24 @@ wishingWell.controller('visGraph', ['$scope', '$window', 'appService', function(
     get();
     }]);
 
-    wishingWell.factory('appService', ['$q', '$http', function($q, $http) {
-        return {
-            get: function(method, url) {
-                    var deferred = $q.defer();
+wishingWell.factory('appService', ['$q', '$http', function($q, $http) {
+    return {
+        get: function(method, url) {
+          var deferred = $q.defer();
 
-                    /** NOTE: we can replace 'data.json' with our data source */
-                    $http.get('../data.json')
-                        .success(function(response) {
-                            deferred.resolve(response);
-                 })
-                 .error(function() {
-                    deferred.reject("Error! @wishingWell.appService");
-                 });
+          /** NOTE: we can replace 'data.json' with our actual data */
+          $http.get('data.json')
+            .success(function(response) {
+              deferred.resolve(response);
+            })
+            .error(function() {
+              deferred.reject("Error! @app.appService");
+          	});
 
-            return deferred.promise;
-            }
-        };
-    }]);
+        return deferred.promise;
+        }
+    };
+}]);
 
 
 
