@@ -1,4 +1,6 @@
-var wishingWell = angular.module('wishingWell', [ 'ngRoute' ]);
+'use strict';
+
+var wishingWell = angular.module('wishingWell', [ 'ngRoute', 'ngVisgraph' ]);
 
 wishingWell.config(function($routeProvider, $httpProvider) {
 
@@ -187,6 +189,45 @@ wishingWell.controller('navigation',
             });
         };
     });
+
+/** controller for vis network graph */
+wishingWell.controller('visGraph', ['$scope', '$window', 'appService', function($scope, $window, appService) {
+    var get = function() {
+        appService.get().then(function(promise) {
+            if (angular.isDefined(promise.error) && promise.error === 0) {
+                $scope.graph = {error: promise.error, data: {nodes: promise.nodes, edges: promise.edges}, options: promise.options};
+            }
+        }, function(promise) {
+            console.error('appService.promise.error', promise);
+           });
+    };
+
+    $scope.callbackFunction = function(params) {
+        console.log(angular.toJson(params));
+    };
+
+    get();
+    }]);
+
+    wishingWell.factory('appService', ['$q', '$http', function($q, $http) {
+        return {
+            get: function(method, url) {
+                    var deferred = $q.defer();
+
+                    /** NOTE: we can replace 'data.json' with our data source */
+                    $http.get('../data.json')
+                        .success(function(response) {
+                            deferred.resolve(response);
+                 })
+                 .error(function() {
+                    deferred.reject("Error! @wishingWell.appService");
+                 });
+
+            return deferred.promise;
+            }
+        };
+    }]);
+
 
 
 
