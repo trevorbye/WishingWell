@@ -1,0 +1,14 @@
+<form role="form" ng-submit="controller.register()">
+        <div ng-show="controller.user.username.length > 20">Username must be 20 characters or less.</div>
+        <br>
+        <div ng-show="controller.user.username == null">Username is blank.</div>
+        <br>
+        <input type="text" name="username" ng-model="controller.user.username" placeholder="Choose a username."/>
+        <br/>
+        <div ng-show="controller.user.password == null">Password is blank.</div>
+        <br>
+        <input type="password" name="password" ng-model="controller.user.password" placeholder="Choose a password."/>
+        <input class="button" type="submit" value="Submit">
+        <div>{{controller.msg}}</div>
+</form>
+

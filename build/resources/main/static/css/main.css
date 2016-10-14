@@ -1,0 +1,64 @@
+@import 'https://fonts.googleapis.com/css?family=Rajdhani';
+
+body {
+    font-family: Rajdhani, sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: white;
+    background-color: #2bc4ef;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.navback {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: dimgray;
+
+}
+
+li {
+    float: left;
+}
+
+#right {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color:black;
+}
+
+.contain-form {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+
+#wish-form li {
+    float: left;
+    position: absolute;
+    margin-left: 10px;
+}
+
+
+
+
